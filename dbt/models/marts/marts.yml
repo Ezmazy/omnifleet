@@ -1,0 +1,47 @@
+# dbt tests run after the tables build.
+version: 2
+
+models:
+  - name: dim_vehicles
+    columns:
+      - name: vehicle_sk
+        tests: [unique, not_null]
+      - name: vehicle_id
+        tests: [unique, not_null]
+
+  - name: dim_drivers
+    columns:
+      - name: driver_sk
+        tests: [unique, not_null]
+      - name: driver_id
+        tests: [unique, not_null]
+
+  - name: dim_routes
+    columns:
+      - name: route_sk
+        tests: [unique, not_null]
+      - name: route_id
+        tests: [unique, not_null]
+
+  - name: fct_trip_operations
+    columns:
+      - name: trip_sk
+        tests: [unique, not_null]
+      - name: trip_id_bk
+        tests: [unique, not_null]
+      # every fact row should point at a real vehicle / driver / route
+      - name: vehicle_key_sk
+        tests:
+          - relationships:
+              to: ref('dim_vehicles')
+              field: vehicle_sk
+      - name: driver_key_sk
+        tests:
+          - relationships:
+              to: ref('dim_drivers')
+              field: driver_sk
+      - name: route_key_sk
+        tests:
+          - relationships:
+              to: ref('dim_routes')
+              field: route_sk

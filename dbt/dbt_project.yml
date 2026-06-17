@@ -1,0 +1,18 @@
+# OmniFleet V003 dbt project
+# dbt builds the gold star (dims + fact) from the staging tables.
+name: omnifleet_v003
+version: "1.0.0"
+config-version: 2
+
+profile: omnifleet_v003
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  omnifleet_v003:
+    marts:
+      +materialized: table
+      # no "+schema:" on purpose -> tables land in "public" (the profile schema).
+      # adding +schema: public would create "public_public" in dbt-postgres.

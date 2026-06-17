@@ -1,0 +1,20 @@
+# Where dbt reads from.
+#  staging  = written by spark staging_load.py
+#  prebuilt = made once by sql/gold_schema.sql (dbt only references it)
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: stg_vehicles
+      - name: stg_drivers
+      - name: stg_routes
+      - name: stg_trips
+      - name: stg_trip_cargo_agg     # per-trip cargo rollup (weight, value, fees)
+      - name: stg_trip_telemetry_agg  # per-trip sensor tick counts + fuel consumed
+
+  - name: prebuilt
+    schema: public
+    tables:
+      - name: dim_date

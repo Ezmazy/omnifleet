@@ -1,0 +1,36 @@
+# ----- Data (too big / regenerable - never commit) -----
+notebooks/data/
+**/quick_sensors/
+**/slow_sensors/
+*.csv
+*.parquet
+
+# ----- Spark JARs (downloaded via spark/jars/README - don't commit binaries) -----
+spark/jars/*.jar
+
+# ----- dbt build artifacts (regenerated on every run) -----
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+
+# ----- Logs & checkpoints -----
+logs/
+*.log
+**/producer_checkpoint*.json
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# ----- Secrets / local env (use .example files instead) -----
+.env
+*.local
+
+# ----- OS / editor noise -----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

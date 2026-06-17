@@ -1,0 +1,13 @@
+# dbt connection to the postgres container
+omnifleet_v003:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      port: 5432
+      user: omnifleet
+      password: omnifleet123
+      dbname: omnifleet
+      schema: public
+      threads: 4
